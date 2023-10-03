@@ -6,51 +6,53 @@
 static const char zHelp[] =
   "Usage: %s [--options] DATABASE\n"
   "Options:\n"
-  "  --autovacuum        Enable AUTOVACUUM mode\n"
-  "  --big-transactions  Add BEGIN/END around all large tests\n"
-  "  --cachesize N       Set PRAGMA cache_size=N. Note: N is pages, not bytes\n"
-  "  --checkpoint        Run PRAGMA wal_checkpoint after each test case\n"
-  "  --exclusive         Enable locking_mode=EXCLUSIVE\n"
-  "  --explain           Like --sqlonly but with added EXPLAIN keywords\n"
-  "  --fullfsync         Enable fullfsync=TRUE\n"
-  "  --heap SZ MIN       Memory allocator uses SZ bytes & min allocation MIN\n"
-  "  --incrvacuum        Enable incremenatal vacuum mode\n"
-  "  --journal M         Set the journal_mode to M\n"
-  "  --key KEY           Set the encryption key to KEY\n"
-  "  --lookaside N SZ    Configure lookaside for N slots of SZ bytes each\n"
-  "  --memdb             Use an in-memory database\n"
-  "  --mmap SZ           MMAP the first SZ bytes of the database file\n"
-  "  --multithread       Set multithreaded mode\n"
-  "  --nolongdouble      Disable the use of long double\n"
-  "  --nomemstat         Disable memory statistics\n"
-  "  --nomutex           Open db with SQLITE_OPEN_NOMUTEX\n"
-  "  --nosync            Set PRAGMA synchronous=OFF\n"
-  "  --notnull           Add NOT NULL constraints to table columns\n"
-  "  --output FILE       Store SQL output in FILE\n"
-  "  --pagesize N        Set the page size to N\n"
-  "  --pcache N SZ       Configure N pages of pagecache each of size SZ bytes\n"
-  "  --primarykey        Use PRIMARY KEY instead of UNIQUE where appropriate\n"
-  "  --repeat N          Repeat each SELECT N times (default: 1)\n"
-  "  --reprepare         Reprepare each statement upon every invocation\n"
-  "  --reserve N         Reserve N bytes on each database page\n"
-  "  --script FILE       Write an SQL script for the test into FILE\n"
-  "  --serialized        Set serialized threading mode\n"
-  "  --singlethread      Set single-threaded mode - disables all mutexing\n"
-  "  --sqlonly           No-op.  Only show the SQL that would have been run.\n"
-  "  --shrink-memory     Invoke sqlite3_db_release_memory() frequently.\n"
-  "  --size N            Relative test size.  Default=100\n"
-  "  --strict            Use STRICT table where appropriate\n"
-  "  --stats             Show statistics at the end\n"
-  "  --stmtscanstatus    Activate SQLITE_DBCONFIG_STMT_SCANSTATUS\n"
-  "  --temp N            N from 0 to 9.  0: no temp table. 9: all temp tables\n"
-  "  --testset T         Run test-set T (main, cte, rtree, orm, fp, debug)\n"
-  "  --trace             Turn on SQL tracing\n"
-  "  --threads N         Use up to N threads for sorting\n"
-  "  --utf16be           Set text encoding to UTF-16BE\n"
-  "  --utf16le           Set text encoding to UTF-16LE\n"
-  "  --verify            Run additional verification steps\n"
-  "  --vfs NAME          Use the given (preinstalled) VFS\n"
-  "  --without-rowid     Use WITHOUT ROWID where appropriate\n"
+  "  --autocheckpoint          Enable WAL autocheckpoint mode\n"
+  "  --autovacuum              Enable AUTOVACUUM mode\n"
+  "  --big-transactions        Add BEGIN/END around all large tests\n"
+  "  --cachesize N             Set PRAGMA cache_size=N. Note: N is pages, not bytes\n"
+  "  --checkpoint              Run PRAGMA wal_checkpoint after each test case\n"
+  "  --exclusive               Enable locking_mode=EXCLUSIVE\n"
+  "  --explain                 Like --sqlonly but with added EXPLAIN keywords\n"
+  "  --fullfsync               Enable fullfsync=TRUE\n"
+  "  --heap SZ MIN             Memory allocator uses SZ bytes & min allocation MIN\n"
+  "  --incrvacuum              Enable incremenatal vacuum mode\n"
+  "  --journal M               Set the journal_mode to M\n"
+  "  --journal-size-limit SZ   Set the journal_size_limit to SZ\n"
+  "  --key KEY                 Set the encryption key to KEY\n"
+  "  --lookaside N SZ          Configure lookaside for N slots of SZ bytes each\n"
+  "  --memdb                   Use an in-memory database\n"
+  "  --mmap SZ                 MMAP the first SZ bytes of the database file\n"
+  "  --multithread             Set multithreaded mode\n"
+  "  --nolongdouble            Disable the use of long double\n"
+  "  --nomemstat               Disable memory statistics\n"
+  "  --nomutex                 Open db with SQLITE_OPEN_NOMUTEX\n"
+  "  --nosync                  Set PRAGMA synchronous=OFF\n"
+  "  --notnull                 Add NOT NULL constraints to table columns\n"
+  "  --output FILE             Store SQL output in FILE\n"
+  "  --pagesize N              Set the page size to N\n"
+  "  --pcache N SZ             Configure N pages of pagecache each of size SZ bytes\n"
+  "  --primarykey              Use PRIMARY KEY instead of UNIQUE where appropriate\n"
+  "  --repeat N                Repeat each SELECT N times (default: 1)\n"
+  "  --reprepare               Reprepare each statement upon every invocation\n"
+  "  --reserve N               Reserve N bytes on each database page\n"
+  "  --script FILE             Write an SQL script for the test into FILE\n"
+  "  --serialized              Set serialized threading mode\n"
+  "  --singlethread            Set single-threaded mode - disables all mutexing\n"
+  "  --sqlonly                 No-op.  Only show the SQL that would have been run.\n"
+  "  --shrink-memory           Invoke sqlite3_db_release_memory() frequently.\n"
+  "  --size N                  Relative test size.  Default=100\n"
+  "  --strict                  Use STRICT table where appropriate\n"
+  "  --stats                   Show statistics at the end\n"
+  "  --stmtscanstatus          Activate SQLITE_DBCONFIG_STMT_SCANSTATUS\n"
+  "  --temp N                  N from 0 to 9.  0: no temp table. 9: all temp tables\n"
+  "  --testset T               Run test-set T (main, cte, rtree, orm, fp, debug)\n"
+  "  --trace                   Turn on SQL tracing\n"
+  "  --threads N               Use up to N threads for sorting\n"
+  "  --utf16be                 Set text encoding to UTF-16BE\n"
+  "  --utf16le                 Set text encoding to UTF-16LE\n"
+  "  --verify                  Run additional verification steps\n"
+  "  --vfs NAME                Use the given (preinstalled) VFS\n"
+  "  --without-rowid           Use WITHOUT ROWID where appropriate\n"
 ;
 
 #include "sqlite3.h"
@@ -2202,10 +2204,12 @@ static int xCompileOptions(void *pCtx, int nVal, char **azVal, char **azCol){
   return SQLITE_OK;
 }
 int main(int argc, char **argv){
+  int doAutoChckpnt = 0;        /* True for --autocheckpoint */
   int doAutovac = 0;            /* True for --autovacuum */
   int cacheSize = 0;            /* Desired cache size.  0 means default */
   int doExclusive = 0;          /* True for --exclusive */
   int doFullFSync = 0;          /* True for --fullfsync */
+  int journalSize = 0;          /* Desired journal_size_limit */
   int nHeap = 0, mnHeap = 0;    /* Heap size from --heap */
   int doIncrvac = 0;            /* True for --incrvacuum */
   const char *zJMode = 0;       /* Journal mode */
@@ -2287,6 +2291,11 @@ int main(int argc, char **argv){
       }else if( strcmp(z,"journal")==0 ){
         ARGC_VALUE_CHECK(1);
         zJMode = argv[++i];
+      }else if( strcmp(z,"journal-size-limit")==0 ){
+        ARGC_VALUE_CHECK(1);
+        journalSize = integerValue(argv[++i]);
+      }else if( strcmp(z,"autocheckpoint")==0 ){
+        doAutoChckpnt = 1;
       }else if( strcmp(z,"key")==0 ){
         ARGC_VALUE_CHECK(1);
         zKey = argv[++i];
@@ -2430,6 +2439,8 @@ int main(int argc, char **argv){
       }
     }else if( zDbName==0 ){
       zDbName = argv[i];
+      printf("zDbName %s\n", zDbName);
+      assert(0);
     }else{
       fatal_error("surplus argument: %s\nUse \"%s -?\" for help\n",
                   argv[i], argv[0]);
@@ -2466,12 +2477,15 @@ int main(int argc, char **argv){
     ** when running from a WASM build of speedtest1, so that the db
     ** can be cleaned up properly. For historical compatibility, we'll
     ** also simply unlink(). */
+    printf("zDbName: %s\n", zDbName);
+    assert(0);
     if( pVfs!=0 ){
       pVfs->xDelete(pVfs, zDbName, 1);
     }
     unlink(zDbName);
   }
 
+  printf("zDbName: %s\n", zDbName);
   /* Open the database and the input file */
   if( sqlite3_open_v2(memDb ? ":memory:" : zDbName, &g.db,
                       openFlags, zVfs) ){
@@ -2530,6 +2544,12 @@ int main(int argc, char **argv){
   }
   if( zJMode ){
     speedtest1_exec("PRAGMA journal_mode=%s", zJMode);
+  }
+  if( doAutoChckpnt ) {
+    speedtest1_exec("PRAGMA wal_autocheckpoint = 1");
+  }
+  if( journalSize ) {
+    speedtest1_exec("PRAGMA journal_size_limit=%d", journalSize);
   }
 
   if( g.bExplain ) printf(".explain\n.echo on\n");
