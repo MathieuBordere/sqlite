@@ -2546,7 +2546,7 @@ int main(int argc, char **argv){
     speedtest1_exec("PRAGMA journal_mode=%s", zJMode);
   }
   if( doAutoChckpnt ) {
-    speedtest1_exec("PRAGMA wal_autocheckpoint = 1");
+    speedtest1_exec("PRAGMA wal_autocheckpoint = TRUNCATE");
   }
   if( journalSize ) {
     speedtest1_exec("PRAGMA journal_size_limit=%d", journalSize);
